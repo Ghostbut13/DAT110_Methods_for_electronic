@@ -116,39 +116,34 @@ begin
     mem_CYCLES_WL_A <=  load_words("E:/CTH-EESD/Q2/DAT110_Methods_for_electronic/lab/lab1/sim/regular/A.tv");
     mem_CYCLES_WL_B <=  load_words("E:/CTH-EESD/Q2/DAT110_Methods_for_electronic/lab/lab1/sim/regular/B.tv");
     mem_ExpectedOutput <= load_words("E:/CTH-EESD/Q2/DAT110_Methods_for_electronic/lab/lab1/sim/regular/ExpectedOutput.tv");
-    
+     
 
-    
-    wait for 10 ns;
-    for index in 0 to cycles-1 loop
+  for index in CYCLES-1 downto 0 loop
       ---------------------------------------------------------------------------
       -- push the stimuli into component
       ---------------------------------------------------------------------------
       a_tb3_signal <= mem_CYCLES_WL_A(index);
       b_tb3_signal <= mem_CYCLES_WL_B(index);
-      wait for 200 ns ;
-      mem_RealOutput(index) <= sum_tb3_signal;
-      wait for 200 ns ; 
-      -- compare
-      --if wait_two_clk_to_compare>=3 then
-        assert sum_tb3_signal = mem_ExpectedOutput(index) report "error my friend" severity error;
-        -- write something to my_log
-        if sum_tb3_signal /= mem_ExpectedOutput(index) then
-          write(L, string'("index = "));
-          write(L, index);
-          write(L, string'("FALSE"));
-          writeline(LOG, L);
-        else
-          write(L, string'("index = "));
-          write(L, index);
-          write(L, string'("correct"));
-          writeline(LOG, L);
-        end if;
-      --end if;
-      
+     
+      wait for 200 ns;
+            
+      -- .........      
     end loop;  -- i
-
-
   end process verification_process;
   
+
+
+-- compare
+      assert sum_tb3_signal = mem_ExpectedOutput(index) report "error my friend" severity error;
+
+
+      -- write something to my_log
+      -- if sum_tb3_signal \= mem_ExpectedOutput(index).......
+      write(L, string'("index = "));
+      write(L, index);
+      writeline(LOG, L);
+
+
+
+
 end architecture arch_TB_skeleton;
