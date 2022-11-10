@@ -99,7 +99,7 @@ begin
           gDOT_inst : gDOT
             port map (p1 => p(i-1)(j),
                       g1 => g(i-1)(j),
-                      g2 => g(i-1)(2**(i-1)-1),--!find the correct description!),
+                      g2 => g(i-1)(2**(i)-1),--!find the correct description!),
                       g  => g(i)(j));
         end generate gDOTs;
 
@@ -108,8 +108,8 @@ begin
           DOT_inst : DOT
             port map(p1 => p(i-1)(j),
                      g1 => g(i-1)(j),
-                     p2 => p(i-1)(integer(FLOOR(real(j)/real(2**(i-1))))*(2**(i-1))-1),--!find the correct description!),
-                     g2 => g(i-1)(integer(FLOOR(real(j)/real(2**(i-1))))*(2**(i-1))-1),--!find the correct description!),
+                     p2 => p(i-1)(integer(FLOOR(real(j)/real(2**(i-1))*real(2**(i-1)-1))),--!find the correct description!),
+                     g2 => g(i-1)(integer(FLOOR(real(j)/real(2**(i-1))*real(2**(i-1)-1)),--!find the correct description!),
                      p  => p(i)(j),
                      g  => g(i)(j));
         end generate DOTs;
